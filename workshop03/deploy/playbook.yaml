@@ -1,0 +1,28 @@
+- name: Install Code Server
+  hosts: all
+  vars:
+    CODESERVER_PASSWORD: 'codeIt'
+  tasks:
+  - name: Replace code-server service file variables
+    replace:
+      path: /lib/systemd/system/code-server.service
+      regexp: '__CODESERVER_PASSWORD__'
+      replace: "{{ CODESERVER_PASSWORD }}"
+
+  - name: Enable code-server service
+    systemd:
+      name: code-server
+      daemon_reload: true
+      enabled: true
+      state: restarted
+
+  - name: Replace nginx code-server file variables
+    replace:
+      path: /etc/nginx/sites-available/code-server.conf
+      regexp: '__CODESERVER_DOMAIN__'
+      replace: "{{ codeserver_domain }}"
+      
+  - name: Restart nginx
+    systemd:
+      name: nginx
+      state: restarted

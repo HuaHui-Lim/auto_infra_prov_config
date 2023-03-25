@@ -1,0 +1,10 @@
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_user: root
+    ansible_ssh_private_key_file: /home/fred/.ssh/id_ecdsa
+  hosts:
+    codeserver:
+      ansible_host: 178.128.29.108
+      codeserver_domain: code-server-178.128.29.108.nip.io
+      codeserver_password: changeIt
