@@ -1,0 +1,30 @@
+Setup server with Terraform
+1. Provision droplet, sgp1, ubuntu 20.04, 2gb memory
+2. Add SSH key
+3. Generate inventory.yaml file with IP address / root / private_key
+4. Use ansible to ping your inventory.yaml
+  (ansible all -i inventory.yaml -m ping)
+
+Install code server
+- update the OS to latest patches
+	apt update
+	apt upgrade
+- create directory in /usr/local/opt (file module)
+- upzip the codeserver archive in /usr/local/opt
+	make sure that you don't download it again if you have previously downloaded the archive
+
+- symbolic link
+  make directory /var/lib/code-server
+  ls -s /usr/local/opt/cs_dir /usr/lib/code-server
+  ln -s /usr/local/opt/cs_dir/bin/code-server /usr/bin/code-server
+
+- replace PASSWORD in code-server.service, copy the file to /lib/syemd/system
+- start code server as service
+	apt daemon-reload
+	apt enable code-server
+	apt start code-server
+
+Install nginx
+- install nginx
+- generate nginx config for domain, copy file to /etc/nginx/sites-available
+- sym link /etc/nginx/sites-available

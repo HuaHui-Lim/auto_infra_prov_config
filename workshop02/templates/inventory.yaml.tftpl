@@ -1,0 +1,10 @@
+all:
+  vars:
+    ansible_user: ${codeserver_root_user}
+    ansible_connection: ssh
+    ansible_ssh_private_key_file: ${ssh_private_key}
+  hosts:
+    ${codeserver_name}:
+      ansible_host: ${codeserver_ip}
+      codeserver_domain: code-server-${codeserver_domain}.nip.io
+      codeserver_password: ${codeserver_password}
