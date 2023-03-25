@@ -1,0 +1,11 @@
+- name: Connectivity test
+  hosts: all
+  vars:
+
+  tasks:
+  - name: ping
+    ping:
+  - name: set
+    setup:
+  - name: debug
+    msg: ""
